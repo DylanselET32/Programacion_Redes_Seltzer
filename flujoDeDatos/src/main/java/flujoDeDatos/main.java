@@ -1,6 +1,7 @@
 package flujoDeDatos;
 
 import java.io.PrintStream;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class main {
@@ -32,8 +33,7 @@ public class main {
 		
 		
 		
-		Logger.getLogger(main.class.getName()).log(Level.SEVERE, "Error critico en el sistema.");  //son errores personalizados complejos
-		
+		Logger.getLogger(main.class.getName()).log(Level.SEVERE, "Error Severo, EROR CRITICO");
 		PrintStream err = new PrintStream(System.err);
 		PrintStream ps = new PrintStream(System.out);
 		ps.println("Holaa");
