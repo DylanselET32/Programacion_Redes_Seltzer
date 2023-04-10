@@ -41,25 +41,31 @@ public class Ejecutable {
 			Ejercicio1a.ejecutar();
 			break;
 		case 2:
-			Ejercicio1a.ejecutar();
+			Ejercicio1b.ejecutar();
 			break;
 		case 3:
-			Ejercicio1a.ejecutar();
+			Ejercicio1c.ejecutar();
 			break;
 		case 4:
-			Ejercicio1a.ejecutar();
+			Ejercicio1d.ejecutar();
 			break;
 		case 5:
-			Ejercicio1a.ejecutar();
+			Ejercicio1e.ejecutar();
 			break;
 		case 6:
-			Ejercicio1a.ejecutar();
+			Ejercicio1f.ejecutar();
 			break;
 		case 7:
-			Ejercicio1a.ejecutar();
+			Ejercicio1g.ejecutar();
 			break;
-		
+		case 0:
+			System.exit(0);
+			break;
+		default:
+			ps.println("Opcion Invalida");
+			break;
 		}
+		menu();
 		
 	}
 	

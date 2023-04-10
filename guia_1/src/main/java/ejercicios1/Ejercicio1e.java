@@ -1,0 +1,34 @@
+package ejercicios1;
+
+import java.io.PrintStream;
+
+import guia_1.Utils;
+
+public class Ejercicio1e {
+
+	/*
+	 Dado un tiempo en segundos, la computadora lo muestra expresado en días, horas, minutos y segundos.
+
+
+	 */
+	
+	public static PrintStream ps = ps = new PrintStream(System.out);;
+
+	public static void  ejecutar() {
+		double tiempoSegundos = Utils.leerDouble("Ingrese el valor del primer angulo: ");
+		int dias = (int)(tiempoSegundos / 86400);
+		int horas = (int)((tiempoSegundos % 86400) / 3600);
+		int minutos = (int)(((tiempoSegundos % 86400) % 3600) / 60);
+		int segundos = (int)(((tiempoSegundos % 86400) % 3600) % 60);
+		
+		
+		ps.println("El valor del tercer angulo es " + angulo3);
+	}
+	
+	
+	
+	
+	
+	
+	
+}
