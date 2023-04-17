@@ -10,7 +10,8 @@ public class Ejecutable {
 	
 	public static void main(String[] args) {
 		
-		pruebasReader inicio = new pruebasReader();
+		//pruebasReader inicio = new pruebasReader();
+		Colecciones inicio2 = new Colecciones();
 			
 		}
 
