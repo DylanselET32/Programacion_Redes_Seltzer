@@ -121,6 +121,8 @@ public class Colecciones {
 		Set<String> key = inglesEspañol.keySet();
 		ArrayList<String> values = (ArrayList<String>)inglesEspañol.values();
 		
+		//values ahora es ARRAYlIST
+		
 		
 	}
 	
