@@ -17,10 +17,7 @@ public class Ejercicio2a {
 		int horas;
 		double valorHora = 0;
 		
-		valorHora = Utils.leerDouble("Ingrese el valor por hora: ");
-		horas = Utils.leerInt("Ingrese las horas trabajadas: ");
-		double valorBruto = valorHora * horas; 
-		ps.print(valorBruto);
+		//seguir desde aca el codigo de Utils, el LeerR tiene que leer con Render
 	}
 	
 	

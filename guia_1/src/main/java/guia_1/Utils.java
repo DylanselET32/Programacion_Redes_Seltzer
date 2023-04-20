@@ -63,4 +63,13 @@ public class Utils {
 	
 	
 	
+	public static String LeerR(String pregunta) {
+		ps.print(pregunta);
+		String cadena = "aca va el codigo de render";
+		return cadena;
+		
+	}
+	
+	
+	
 }

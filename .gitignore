@@ -4,3 +4,6 @@ guia_1/.project
 guia_1/.settings/org.eclipse.jdt.apt.core.prefs
 guia_1/.settings/org.eclipse.jdt.core.prefs
 guia_1/.settings/org.eclipse.m2e.core.prefs
+guia_1/target/classes/META-INF/maven/ar.edu.et32/guia_1/pom.properties
+guia_1/target/classes/META-INF/maven/ar.edu.et32/guia_1/pom.properties
+.project

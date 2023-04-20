@@ -19,17 +19,10 @@ public class Ejecutable {
 		ps = new PrintStream(System.out);
 		menu();
 		
-		
-		
-		
-		
-		
-		
-		
-		
+
 	}
 	public static void menuEjercicio1() {
-		ps.println("1 - Ejercicio A");
+		ps.println("\n1 - Ejercicio A");
 		ps.println("2 - Ejercicio B");
 		ps.println("3 - Ejercicio C");
 		ps.println("4 - Ejercicio D");
@@ -53,7 +46,7 @@ public class Ejecutable {
 		}
 	
 	public static void menuEjercicio2() {
-		ps.println("1 - Ejercicio A");
+		ps.println("\n1 - Ejercicio A");
 		ps.println("2 - Ejercicio B");
 		ps.println("3 - Ejercicio C");
 		ps.println("4 - Ejercicio D");
@@ -79,7 +72,7 @@ public class Ejecutable {
 		}
 	
 	public static void menuEjercicio3() {
-		ps.println("1 - Ejercicio A");
+		ps.println("\n1 - Ejercicio A");
 		ps.println("2 - Ejercicio B");
 		ps.println("3 - Ejercicio C");
 		ps.println("4 - Ejercicio D");
@@ -103,7 +96,7 @@ public class Ejecutable {
 		}
 	
 	public static void menuEjercicio4() {
-		ps.println("1 - Ejercicio A");
+		ps.println("\n1 - Ejercicio A");
 		ps.println("2 - Ejercicio B");
 		ps.println("3 - Ejercicio C");
 		ps.println("4 - Ejercicio D");
@@ -127,7 +120,7 @@ public class Ejecutable {
 		}
 	
 	public static void menu() {
-			ps.println("1 - Ejercicio 1");
+			ps.println("\n1 - Ejercicio 1");
 			ps.println("2 - Ejercicio 2");
 			ps.println("3 - Ejercicio 3");
 			ps.println("4 - Ejercicio 4");

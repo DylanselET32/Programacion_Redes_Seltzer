@@ -15,7 +15,7 @@ public class Ejercicio1e {
 	public static PrintStream ps = ps = new PrintStream(System.out);;
 
 	public static void  ejecutar() {
-		double tiempoSegundos = Utils.leerDouble("Ingrese el valor del primer angulo: ");
+		double tiempoSegundos = Utils.leerDouble("Ingrese los segundos: ");
 		int dias = (int)(tiempoSegundos / 86400);
 		int horas = (int)((tiempoSegundos % 86400) / 3600);
 		int minutos = (int)(((tiempoSegundos % 86400) % 3600) / 60);
