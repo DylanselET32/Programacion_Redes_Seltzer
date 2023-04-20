@@ -1,10 +1,10 @@
-package ejercicios1;
+package ejercicios4;
 
 import java.io.PrintStream;
 
 import guia_1.Utils;
 
-public class Ejercicio1e {
+public class Ejercicio4e {
 
 	/*
 	 Dado un tiempo en segundos, la computadora lo muestra expresado en días, horas, minutos y segundos.
