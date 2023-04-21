@@ -4,20 +4,17 @@ import java.io.PrintStream;
 import guia_1.Utils;
 
 public class Ejercicio2c {
-
-	/*
-	 Dada la superficie de un cuadrado (en m2), la computadora muestra su perímetro.
-
-
-	 */
 	
 	public static PrintStream ps = ps = new PrintStream(System.out);;
 
 	public static void  ejecutar() {
-		double superficie = Utils.leerDouble("Ingrese la superficie del cuadrado: ");
-		double perimetro = (Math.sqrt(superficie)) *4;
+		int num = Utils.leerRInt("Ingrese un numero: ");
+		if(num%2 == 0) {
+			ps.println(num+" es par");
+		}else {
+			ps.println(num+" es inpar");
+		}
 		
-		ps.println("El valor del perimetro es " + perimetro);
 
 	}
 	

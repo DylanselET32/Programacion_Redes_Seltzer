@@ -1,24 +1,24 @@
 package ejercicios2;
 
 import java.io.PrintStream;
+import java.util.ArrayList;
+import java.util.Collections;
 
 import guia_1.Utils;
 
 public class Ejercicio2b {
 
-	/*
-	 Dados los valores de dos de los ángulos interiores de un triángulo, la computadora muestra el valor del restante.
 
-	 */
-	
 	public static PrintStream ps = ps = new PrintStream(System.out);;
 
 	public static void  ejecutar() {
-		double angulo1 = Utils.leerDouble("Ingrese el valor del primer angulo: ");
-		double angulo2 = Utils.leerDouble("Ingrese el valor del segundo angulo: ");
-		double angulo3 = 180 - (angulo1 + angulo2) ;
-		
-		ps.println("El valor del tercer ángulo es " + angulo3);
+		ArrayList<Integer> numeros= new ArrayList();
+		for(int i =1;i<=4; i++) {
+			int num = Utils.leerRInt("Ingrese el numero "+i+": ");
+			numeros.add(num);
+		}
+		Collections.sort(numeros); //ordena el arraylist acendentemente
+		ps.println("El menor es: "+numeros.get(0));
 
 	}
 	

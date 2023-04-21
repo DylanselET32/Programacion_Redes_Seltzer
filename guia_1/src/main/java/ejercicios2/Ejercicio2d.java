@@ -6,25 +6,32 @@ import guia_1.Utils;
 
 public class Ejercicio2d {
 
-	/*
-	 Dada una temperatura en grados Fahrenheit, la computadora la muestra en grados centígrados.
-
-		C = (F - 32) * 5/9
-
-	 */
+	
 	
 	public static PrintStream ps = ps = new PrintStream(System.out);;
 
 	public static void  ejecutar() {
-		double fah = Utils.leerDouble("Ingrese los grados Fahrenheit: ");
-		double  cen= (fah - 32) * 5/9 ;
+		double num1 = Utils.leerRDouble("Ingrese un numero: ");
+		double num2 = Utils.leerRDouble("Ingrese otro numero: ");
+		double numMayor;
+		double numMenor;
 		
-		ps.printf("La temperatura en grados Celsius es: %.2f\n", cen);
+		if(num1>num2) {
+			numMayor = num1;
+			numMenor = num2;
+		}else{
+			numMayor = num2;
+			numMenor = num1;
+		}
+		
+		if(numMayor%numMenor == 0) {
+			ps.printf("El %.2f es divisible por %.2f",numMayor,numMenor);
+		}else {
+			ps.printf("El %.2f NO es divisible por %.2f",numMayor,numMenor);
+		}
+		
 		
 	}
-	
-	
-	
 	
 	
 	
