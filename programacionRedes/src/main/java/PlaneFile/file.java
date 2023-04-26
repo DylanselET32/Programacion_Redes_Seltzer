@@ -14,18 +14,21 @@ public class file {
 
 	File error;
 	FileWriter fw;
-
+	PrintStream ps;
 	public file() {
 		error = new File("errores.log");
+		ps = new PrintStream(System.out);
 		try {
 			fw = new FileWriter(error, true);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		// this.CrearConPrintStream();
 		// this.CrearConPrinter();
-		this.CrearConBuffered();
+		//this.CrearConBuffered();
+		ps.print(this.LeerConBuffered());
 	}
 
 	public void CrearConPrintStream() {
@@ -89,7 +92,7 @@ public class file {
 
 
 
-public void LeerConBuffered() {
+public String LeerConBuffered() {
 	String texto = "";
 	try {
 		FileReader fr = new FileReader(error);
@@ -103,6 +106,6 @@ public void LeerConBuffered() {
 		e.printStackTrace();
 	}
 
-	
+	return texto;
 }
 }
