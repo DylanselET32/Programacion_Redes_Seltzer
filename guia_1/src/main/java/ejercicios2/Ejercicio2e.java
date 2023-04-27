@@ -40,6 +40,8 @@ public class Ejercicio2e {
         zodiacDates.add("19-79"); // Piscis (19 de febrero - 20 de marzo)
         
         String fechaNacimiento = Utils.leerR("ingrese la fecha de nacimiento(dd/mm/aaaa): ");
+       	fechaNacimiento = normalizarFecha(fechaNacimiento);
+        
         int codigoFecha = obtenerFechaNumerica(fechaNacimiento);
         ps.println("codigo: "+codigoFecha);
         //SEGUIR CODIGO
@@ -55,6 +57,16 @@ public class Ejercicio2e {
 	    return (int)diasDesdeElPrimerDiaDelAnio;
 	}
 	
+	public static String normalizarFecha(String fecha) {
+		
+	    String[] partesFecha = fecha.split("/");
+	    int dia = Integer.parseInt(partesFecha[0]);
+	    int mes = Integer.parseInt(partesFecha[1]);
+	    int anio = Integer.parseInt(partesFecha[2]);
+	    String diaNormalizado = (dia < 10) ? "0" + dia : String.valueOf(dia);
+	    String mesNormalizado = (mes < 10) ? "0" + mes : String.valueOf(mes);
+	    return diaNormalizado + "/" + mesNormalizado + "/" + anio;
+	}
 	
 	
 	

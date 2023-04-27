@@ -9,7 +9,7 @@ import ejercicios3.*;
 import ejercicios4.*;
 
 
-public class Ejecutable {
+public class Main {
 	
 	public static PrintStream ps ;
 	
