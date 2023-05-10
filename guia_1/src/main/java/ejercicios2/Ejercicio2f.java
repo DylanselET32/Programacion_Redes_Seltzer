@@ -6,19 +6,23 @@ import guia_1.Utils;
 
 public class Ejercicio2f {
 
-	/*
-	 Dados los valores de dos de los ángulos interiores de un triángulo, la computadora muestra el valor del restante.
 
-	 */
-	
-	public static PrintStream ps = ps = new PrintStream(System.out);;
+	public static PrintStream ps = new PrintStream(System.out);
 
 	public static void  ejecutar() {
-		double angulo1 = Utils.leerDouble("Ingrese el valor del primer angulo: ");
-		double angulo2 = Utils.leerDouble("Ingrese el valor del segundo angulo: ");
-		double angulo3 = 180 - angulo1 + angulo2 ;
+		ps.println("PERSONA 1");
+		String p1 = Utils.leerR("Ingrese el  \"nombre y apellido\" en ese orden: ");
+		ps.println("PERSONA 2");
+		String p2 = Utils.leerR("Ingrese el  \"nombre y apellido\" en ese orden: ");
 		
-		ps.println("El valor del tercer angulo es " + angulo3);
+		if(p1.split(" ")[1].length() > p2.split(" ")[1].length()) {
+			ps.println(p1.split(" ")[0] + " es el que tiene el apellido mas largo");
+		}else if(p1.split(" ")[1].length() < p2.split(" ")[1].length()){
+			ps.println(p2.split(" ")[0] + " es el que tiene el apellido mas largo");
+		}else {
+			ps.println("Ambos tienen un apellido igual de largo");
+		}
+	
 	}
 	
 	

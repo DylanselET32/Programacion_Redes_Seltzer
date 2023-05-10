@@ -26,25 +26,33 @@ public class Ejercicio2e {
 		 "ARIES","TAURO","GÉMINIS", "CÁNCER","LEO","VIRGO","LIBRA",
 		 "ESCORPIO","SAGITARIO","CAPRICORNIO","ACUARIO","PISCIS"));
 		ArrayList<String> zodiacDates = new ArrayList();
-		zodiacDates.add("21-132"); // Aries (21 de marzo - 19 de abril)
-        zodiacDates.add("20-152"); // Tauro (20 de abril - 20 de mayo)
-        zodiacDates.add("21-173"); // Géminis (21 de mayo - 20 de junio)
-        zodiacDates.add("21-204"); // Cáncer (21 de junio - 22 de julio)
-        zodiacDates.add("23-235"); // Leo (23 de julio - 22 de agosto)
-        zodiacDates.add("23-266"); // Virgo (23 de agosto - 22 de septiembre)
-        zodiacDates.add("23-296"); // Libra (23 de septiembre - 22 de octubre)
-        zodiacDates.add("23-327"); // Escorpio (23 de octubre - 21 de noviembre)
-        zodiacDates.add("22-357"); // Sagitario (22 de noviembre - 21 de diciembre)
-        zodiacDates.add("22-20"); // Capricornio (22 de diciembre - 19 de enero)
-        zodiacDates.add("20-50"); // Acuario (20 de enero - 18 de febrero)
-        zodiacDates.add("19-79"); // Piscis (19 de febrero - 20 de marzo)
-        
+		zodiacDates.add("80-110"); // Aries (21 de marzo - 19 de abril)
+		zodiacDates.add("111-140"); // Tauro (20 de abril - 20 de mayo)
+		zodiacDates.add("141-171"); // Géminis (21 de mayo - 20 de junio)
+		zodiacDates.add("172-203"); // Cáncer (21 de junio - 22 de julio)
+		zodiacDates.add("204-234"); // Leo (23 de julio - 22 de agosto)
+		zodiacDates.add("235-265"); // Virgo (23 de agosto - 22 de septiembre)
+		zodiacDates.add("266-295"); // Libra (23 de septiembre - 22 de octubre)
+		zodiacDates.add("296-325"); // Escorpio (23 de octubre - 21 de noviembre)
+		zodiacDates.add("326-355"); // Sagitario (22 de noviembre - 21 de diciembre)
+		zodiacDates.add("356-19"); // Capricornio (22 de diciembre - 19 de enero)
+		zodiacDates.add("20-49"); // Acuario (20 de enero - 18 de febrero)
+		zodiacDates.add("50-79"); // Piscis (19 de febrero - 20 de marzo)
         String fechaNacimiento = Utils.leerR("ingrese la fecha de nacimiento(dd/mm/aaaa): ");
        	fechaNacimiento = normalizarFecha(fechaNacimiento);
         
         int codigoFecha = obtenerFechaNumerica(fechaNacimiento);
+        for (int i = 0; i< zodiacDates.size(); i++) {
+        	int fI = Integer.parseInt(zodiacDates.get(i).split("-")[0]) ;
+        	int fF = Integer.parseInt(zodiacDates.get(i).split("-")[1]) ;
+        	
+        	
+        	if(codigoFecha>=fI && codigoFecha<=fF) {
+        		ps.println("Tu signo es: "+ signosZodiacal.get(i));
+        	}
+        }
         ps.println("codigo: "+codigoFecha);
-        //SEGUIR CODIGO
+        
         
 	}
 	
@@ -54,7 +62,7 @@ public class Ejercicio2e {
 	    LocalDate fecha = LocalDate.parse(fechaString, formato);
 	    LocalDate primerDiaDelAnio = LocalDate.of(fecha.getYear(), 1, 1);
 	    long diasDesdeElPrimerDiaDelAnio = fecha.toEpochDay() - primerDiaDelAnio.toEpochDay();
-	    return (int)diasDesdeElPrimerDiaDelAnio;
+	    return (int)diasDesdeElPrimerDiaDelAnio +1;
 	}
 	
 	public static String normalizarFecha(String fecha) {

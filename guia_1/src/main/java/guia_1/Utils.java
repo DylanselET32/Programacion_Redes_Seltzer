@@ -78,14 +78,6 @@ public class Utils {
 		return cadena;
 	}
 	
-	public static int leerRInt(String pregunta){
-	
-		String cadena = leerR(pregunta);
-		int numero = Integer.parseInt(cadena);
-		return numero;
-
-	}
-	
 	public static Double leerRDouble(String pregunta){
 		
 		String cadena = leerR(pregunta);
@@ -93,6 +85,16 @@ public class Utils {
 		return numero;
 	
 	}
+	
+	public static int leerRInt(String pregunta){
+	
+		Double doubleN = leerRDouble(pregunta);
+		int numero = (int) Math.floor(doubleN);
+		return numero;
+
+	}
+	
+	
 
 	
 	

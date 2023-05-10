@@ -14,11 +14,26 @@ public class Ejercicio2h {
 	public static PrintStream ps = ps = new PrintStream(System.out);;
 
 	public static void  ejecutar() {
-		double angulo1 = Utils.leerDouble("Ingrese el valor del primer angulo: ");
-		double angulo2 = Utils.leerDouble("Ingrese el valor del segundo angulo: ");
-		double angulo3 = 180 - angulo1 + angulo2 ;
+		int n = Math.abs(Utils.leerRInt("Ingrese el valor del numero: "));
+		boolean isPrimo;
+		if(n == 0) {
+			ps.println("El cero no es un numero Natural");
+			return;
+		}
+		for(int i = 2; i<= n; i++) {
+			
+			if(n % i == 0) {
+				isPrimo = false;
+				break;
+			}else {
+				isPrimo = true;
+				break;
+			}
+
+		}
+		isPrimo = (n == 2);
+		ps.print(n + ((isPrimo)?" es":" no es") +" un numero primo");
 		
-		ps.println("El valor del tercer angulo es " + angulo3);
 	}
 	
 	

@@ -14,11 +14,12 @@ public class Ejercicio2g {
 	public static PrintStream ps = ps = new PrintStream(System.out);;
 
 	public static void  ejecutar() {
-		double angulo1 = Utils.leerDouble("Ingrese el valor del primer angulo: ");
-		double angulo2 = Utils.leerDouble("Ingrese el valor del segundo angulo: ");
-		double angulo3 = 180 - angulo1 + angulo2 ;
+		int n = Math.abs(Utils.leerRInt("Ingrese el valor del numero: "));
+		for(int i = 0; i<= 10; i++) {
+			ps.println(n+" X "+i+" = " + n*i); 
+		}
 		
-		ps.println("El valor del tercer angulo es " + angulo3);
+		
 	}
 	
 	
