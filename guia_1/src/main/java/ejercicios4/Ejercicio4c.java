@@ -1,6 +1,11 @@
 package ejercicios4;
 
 import java.io.PrintStream;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
+
 import guia_1.Utils;
 
 public class Ejercicio4c {
@@ -12,12 +17,17 @@ public class Ejercicio4c {
 	 */
 	
 	public static PrintStream ps = ps = new PrintStream(System.out);;
-
+	
 	public static void  ejecutar() {
-		double superficie = Utils.leerDouble("Ingrese la superficie del cuadrado: ");
-		double perimetro = (Math.sqrt(superficie)) *4;
+		List<String> dias = new ArrayList<String>(Arrays.asList("Lunes", "Martes", "Miercoles","Jueves","Viernes","Sabado","Domingo"));
+		dias.set(4, "Juernes");
+		List<String> listaDos = new ArrayList<String>(dias);
+		ps.println("La posicion 3:"+dias.get(3));
+		ps.println("La posicion 4:"+dias.get(4));
+		ps.println("Primer elemento: "+dias.get(0));
+		ps.println("Ultimo elemento: "+dias.get(dias.size()-1));
 		
-		ps.println("El valor del perimetro es " + perimetro);
+		
 
 	}
 	
