@@ -15,8 +15,8 @@ public class Ejercicio4b {
 
 	public static void  ejecutar() {
 		
-		
-
+		Escuela e = new Escuela();
+		e.menuEscuela();
 	}
 	
 	
