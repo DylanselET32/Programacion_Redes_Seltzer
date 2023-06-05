@@ -1,5 +1,9 @@
 package ejercicios3;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.PrintStream;
 
 import guia_1.Utils;
@@ -14,13 +18,27 @@ public class Ejercicio3a {
 	public static PrintStream ps = ps = new PrintStream(System.out);;
 
 	public static void  ejecutar() {
-		int horas;
-		double valorHora = 0;
+		File file = new File("data.txt");
+		FileOutputStream fos;
 		
-		valorHora = Utils.leerDouble("Ingrese el valor por hora: ");
-		horas = Utils.leerInt("Ingrese las horas trabajadas: ");
-		double valorBruto = valorHora * horas; 
-		ps.print(valorBruto);
+		try {
+			fos = new FileOutputStream(file);
+			PrintStream psFile = new PrintStream(fos);
+			String nombre = Utils.leerR("Ingresa tu nombre: ");
+			psFile.println(nombre);
+			ps.flush();
+
+			psFile.close();
+
+			fos.close();
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		
 	}
 	
 	
