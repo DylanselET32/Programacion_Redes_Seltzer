@@ -1,0 +1,11 @@
+1;Dylan;Sel;19;6to 1°;ET32
+2;Emily;Thompson;21;3°;ET27
+3;Sophia;Lopez;25;6°;ET18
+4;Jackson;Smith;22;4°;ET29
+5;Olivia;Johnson;20;2°;ET12
+6;Aiden;Williams;18;5°;ET15
+7;Emma;Brown;23;5°;ET21
+8;Lucas;Garcia;24;6°;ET17
+9;Isabella;Martinez;19;6°;ET19
+10;Mason;Lee;20;6°;ET25
+101;Diego;Sanchez;28;4;ET32
