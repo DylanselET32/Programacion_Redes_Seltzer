@@ -8,8 +8,12 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.util.LinkedList;
+import examen1.*;
+
 
 public class Leer {
+	
+	
 	
 	static PrintStream ps = new PrintStream(System.out);;
 	static InputStreamReader isr = new InputStreamReader( System.in );
@@ -18,7 +22,6 @@ public class Leer {
 	
 	public static String leer(String pregunta){
 		System.out.flush();
-		
 		
 		
 		try {
@@ -41,7 +44,7 @@ public class Leer {
 			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			
 		}
 	
 		return null;

@@ -31,8 +31,15 @@ public class Programa {
      * 
      */
     public void iniciar() {
-    	//datos.estandarizado();
-    	menu();
+    	try {
+			datos.estandarizado();
+			menu();
+		} catch (Exception e) {
+			manejoErr errors = new manejoErr();
+			errors.errPersonalizado("ERROR");
+		}
+    	
+    	
         
     }
 
@@ -42,6 +49,7 @@ public class Programa {
 		ps.println("2-Leer Mayor cantidad de victorias por mes");
 		ps.println("0-Cerrar Programa");
 		int eleccion = Leer.leerRInt("Ingresa el numero elegido: ");
+		
 		switch(eleccion) {
 		case 1:
 			ps.println("--------Leer datos----------");
