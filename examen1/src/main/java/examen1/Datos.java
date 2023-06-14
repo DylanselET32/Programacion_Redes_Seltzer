@@ -6,7 +6,11 @@
 package examen1;
 import java.io.File;
 import java.io.PrintStream;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Map;
 import java.util.logging.Logger;
 
 import utils.Escribir;
@@ -25,10 +29,14 @@ public class Datos {
 	protected static PrintStream  ps = new PrintStream(System.out);
 	protected static File fileJuegosbefore;
 	protected static File fileJuegosafter;
+	LinkedList<String> datos;
+
 
 	public Datos() {
 		fileJuegosbefore = new File("juegos.dat");
     	fileJuegosafter = new File("juegos.scv");
+    	
+
     }
 	
     private static final Logger LOG = Logger.getLogger(Datos.class.getName());
@@ -46,10 +54,48 @@ public class Datos {
     
     
     public void mostrarDatos() {
-    	LinkedList<String> dato = Leer.leerFileBuffered(fileJuegosafter);
-		for(String e: dato) {
+    	datos = Leer.leerFileBuffered(fileJuegosafter);
+		for(String e: datos) {
 			ps.println(e.replaceAll(";", " | "));
 		}
+    	
+    }
+    
+    
+    public void mayorCantVictorias() {
+    	datos = Leer.leerFileBuffered(fileJuegosafter);
+    	Map< String , Integer > meses = new HashMap<String, Integer>();
+    	for(int i = 1; i<datos.size(); i++) {
+    		String dato = datos.get(i);
+    		String hasWon = dato.split(";")[1];
+    		String fecha = dato.split(";")[0];
+    		String mes = fecha.split("/")[1];
+    		if(hasWon.equals("1")) {
+    			if(!meses.containsKey(mes)) {
+    				meses.put(mes, 1);
+    			}else {
+    				meses.replace(mes, meses.get(mes)+1);
+    			}
+    			
+    		}
+			
+    	}
+    	
+    	
+    	String mayorMes = "";
+    	int mayorMesInt = 0;
+   
+    	
+    	for(Map.Entry<String, Integer> item : meses.entrySet()) {
+    		if(mayorMesInt  <= item.getValue()) {
+    			mayorMes = item.getKey();
+    			mayorMesInt = item.getValue();
+
+    		}
+    	}
+    	ps.println("Mes con mayor victoria fue " + mayorMes + " obtubo "+ mayorMesInt+ " vicotorias");
+			
+		
     	
     }
 }

@@ -31,7 +31,7 @@ public class Programa {
      * 
      */
     public void iniciar() {
-    	datos.estandarizado();
+    	//datos.estandarizado();
     	menu();
         
     }
@@ -39,10 +39,8 @@ public class Programa {
 	public  void menu() {
 		ps.println("-------------MENU--------------");
 		ps.println("1-Leer datos");
-		ps.println("2-Editar datos");
-		ps.println("3-Agregar datos");
-		ps.println("4-Eliminar datos");
-		ps.println("0-Leer datos");
+		ps.println("2-Leer Mayor cantidad de victorias por mes");
+		ps.println("0-Cerrar Programa");
 		int eleccion = Leer.leerRInt("Ingresa el numero elegido: ");
 		switch(eleccion) {
 		case 1:
@@ -50,7 +48,8 @@ public class Programa {
 			datos.mostrarDatos();
 			break;
 		case 2:
-			ps.println("--------Editar datos----------");
+			ps.println("--------Leer Mayor cantidad de victorias por mes----------");
+			datos.mayorCantVictorias();
 			break;
 		case 3:
 			ps.println("--------Agregar datos----------");
