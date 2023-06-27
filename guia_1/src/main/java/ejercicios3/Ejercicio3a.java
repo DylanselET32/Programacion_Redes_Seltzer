@@ -40,11 +40,6 @@ public class Ejercicio3a {
 		
 		
 	}
-	
-	
-	
-	
-	
-	
+		
 	
 }
