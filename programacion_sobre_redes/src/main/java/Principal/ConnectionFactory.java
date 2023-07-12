@@ -6,12 +6,14 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.LinkedList;
 
 public class ConnectionFactory {
 
+	public Connection conn = null;
 	
 	public ConnectionFactory() {
-			Connection conn = null;
+			
 			
 			//CONEXION BDD
 			try {
@@ -34,33 +36,71 @@ public class ConnectionFactory {
 			}
 			
 			//CONSULTAS 
-			PreparedStatement ps = null;
-			PrintStream consola = new PrintStream(System.out);
-			String consulta = "SELECT * from empleado ";
-			try {
-				ps = conn.prepareStatement(consulta);
-				//ps.setString(1, "empleado");
-				ResultSet rs =  ps.executeQuery();
-				while(rs.next()) {
-					int id = rs.getInt("id");
-					String nombre = rs.getString("nombre");
-					String apellido = rs.getString("apellido");
-					int rol = rs.getInt("rol");
-					
-					consola.println("Nombre: "+nombre);
-					consola.println("apellido: "+apellido);
-					consola.println("roll: "+rol);
-					
-					if(rs.isLast()) {
-						consola.println("\n Cantidad de resultados: "+rs.getRow());
-					}
-				}
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			
+			
+			
 	}
 	
+	public void close(ResultSet rs ,PreparedStatement ps) {
+		
+		try {
+			rs.close();
+			ps.close();
+			conn.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+			
+	}
+	
+	
+	public  void leerDatos(){
+		PreparedStatement ps = null;
+		PrintStream consola = new PrintStream(System.out);
+		String consulta = "SELECT * from empleado ";
+		try {
+			ps = conn.prepareStatement(consulta);
+			//ps.setString(1, "empleado");
+			ResultSet rs =  ps.executeQuery();
+			while(rs.next()) {
+				int id = rs.getInt("id");
+				String nombre = rs.getString("nombre");
+				String apellido = rs.getString("apellido");
+				String rol = rs.getString("rol");
+				
+				consola.println("Nombre: "+nombre);
+				consola.println("apellido: "+apellido);
+				consola.println("roll: "+rol);
+				
+				if(rs.isLast()) {
+					consola.println("\n Cantidad de resultados: "+rs.getRow());
+				}
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public  void agregar(String nombre,String apellido,String rol){
+		PreparedStatement ps = null;
+		PrintStream consola = new PrintStream(System.out);
+		String consulta = "INSERT INTO `empleado`(`nombre`, `apellido`, `rol`) VALUES (?,?,?)";
+		try {
+			ps = conn.prepareStatement(consulta);
+			ps.setString(1, nombre);
+			ps.setString(2, apellido);
+			ps.setString(3, rol);
+			int rs =  ps.executeUpdate();
+			if(rs >=0) {
+				consola.println("se agrego correctamente");
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	
 	
 }
@@ -70,35 +110,16 @@ public class ConnectionFactory {
 
 /*
  
-  Create Database usuarios;
+ DROP DATABASE  IF EXISTS usuarios;
+ Create Database usuarios;
  USE usuarios;
  CREATE TABLE `empleado` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(20) NOT NULL,
   `apellido` varchar(20) NOT NULL,
-  `rol` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Índices para tablas volcadas
---
-
---
--- Indices de la tabla `empleado`
---
-ALTER TABLE `empleado`
-  ADD PRIMARY KEY (`id`);
-
---
--- AUTO_INCREMENT de las tablas volcadas
---
-
---
--- AUTO_INCREMENT de la tabla `empleado`
---
-ALTER TABLE `empleado`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
- 
+  `rol` varchar(20) NOT NULL,
+   PRIMARY KEY (id)
+)
  
  
  */
