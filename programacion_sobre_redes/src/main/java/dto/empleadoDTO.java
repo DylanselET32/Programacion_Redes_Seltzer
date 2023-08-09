@@ -1,6 +1,6 @@
 package dto;
 
-public class empleadoDTO {
+public class empleadoDTO implements generalDTO{
 	private int id;
 	private String nombre;
 	private String apellido;
