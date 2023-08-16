@@ -4,10 +4,13 @@ import java.io.PrintStream;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 import Principal.ConnectionFactory;
+import dto.DTOfactory;
 import dto.empleadoDTO;
+import dto.generalDTO;
 
 public class EmpleadoDAO {
 	//Muy parecido a hacer CRUD pero para un solo DTO (osea tabla)
@@ -39,7 +42,14 @@ public class EmpleadoDAO {
 				String nombre = rs.getString("nombre");
 				String apellido = rs.getString("apellido");
 				String rol = rs.getString("rol");
-				empleados.add(new empleadoDTO(id,nombre,apellido,rol));
+				empleadoDTO empleado = (empleadoDTO)DTOfactory.getInstance().getDTO("empleado");
+				empleado.setId(id);
+				empleado.setApellido(apellido);
+				empleado.setNombre(nombre);
+				empleado.setRol(rol);
+				
+		
+				empleados.add(empleado);
 			}
 			
 		

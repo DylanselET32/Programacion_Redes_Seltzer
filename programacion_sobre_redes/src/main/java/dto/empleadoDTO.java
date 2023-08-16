@@ -14,7 +14,9 @@ public class empleadoDTO implements generalDTO{
 		this.rol = rol;
 	}
 
-
+	public empleadoDTO() {
+		
+	}
 	public int getId() {
 		return id;
 	}
