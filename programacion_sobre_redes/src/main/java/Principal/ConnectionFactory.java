@@ -6,40 +6,48 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.LinkedList;
 
 public class ConnectionFactory {
 
-	public Connection conn = null;
+	private Connection conn = null;
+	private static ConnectionFactory connectionFactory = null;
 	
-	public ConnectionFactory() {
-			
-			
-			//CONEXION BDD
-			try {
-				//Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
-				Class.forName("com.mysql.cj.jdbc.Driver");
-			} catch (ClassNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			String BDD_hostName= "localhost:3306/"; 
-			String BDD_Name= "usuarios"; 
-			String BDD_userName= "root"; 
-			String BDD_password= ""; 
-			
-			try {
-				conn = DriverManager.getConnection("jdbc:mysql://"+BDD_hostName+BDD_Name,BDD_userName,BDD_password);
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-			//CONSULTAS 
-			
-			
-			
+	private ConnectionFactory() {
+	
 	}
+	
+	
+	@SuppressWarnings("finally")
+	public Connection getConn(){
+		//CONEXION BDD
+		try {
+			//Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+			Class.forName("com.mysql.cj.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		String BDD_hostName= "localhost:3306/"; 
+		String BDD_Name= "usuarios"; 
+		String BDD_userName= "root"; 
+		String BDD_password= ""; 
+		
+		try {
+			conn = DriverManager.getConnection("jdbc:mysql://"+BDD_hostName+BDD_Name,BDD_userName,BDD_password);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			return conn;
+		}
+	}
+	
+	public static ConnectionFactory getInstance() {
+		if (connectionFactory == null)
+			connectionFactory = new ConnectionFactory();
+		return connectionFactory;
+	}
+	
 	
 	public void close(ResultSet rs ,PreparedStatement ps) {
 		

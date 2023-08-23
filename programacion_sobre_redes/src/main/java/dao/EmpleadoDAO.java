@@ -15,8 +15,8 @@ import dto.generalDTO;
 public class EmpleadoDAO {
 	//Muy parecido a hacer CRUD pero para un solo DTO (osea tabla)
 	
+	 ConnectionFactory.getInstance()
 	
-	//agregar
 	
 	//obtener
 	
@@ -26,7 +26,7 @@ public class EmpleadoDAO {
 	
 	public static LinkedList<empleadoDTO> getAllEmpleados() {
 		
-		ConnectionFactory DB = new ConnectionFactory();
+		
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		PrintStream consola = new PrintStream(System.out);
@@ -67,10 +67,103 @@ public class EmpleadoDAO {
 		}
 			
 	}
+
 	
+	//agregar 
+public static int addEmpleado(empleadoDTO empleado) {
+		
+		ConnectionFactory DB = new ConnectionFactory();
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		PrintStream consola = new PrintStream(System.out);
+		
+		String consulta = "INSERT INTO `empleado`(`nombre`, `apellido`, `rol`) VALUES (?,?,?)";
+		
+		try {
+			ps = DB.conn.prepareStatement(consulta);
+			ps.setString(1, empleado.getNombre());
+			ps.setString(2, empleado.getApellido());
+			ps.setString(3, empleado.getRol());
+			
+		return  ps.executeUpdate();
+		
+			
+		}catch (Exception e) {
+			consola.println(e);
+			return 0;
+		}finally {
+			try {
+				DB.close(rs,ps);
+			} catch (Exception e2) {
+				consola.println(e2);
+			}
+			
+		}
+			
+	}
+
+
 	//borrar 
+public static int deleteEmpleado(empleadoDTO empleado) {
 	
+	ConnectionFactory DB = new ConnectionFactory();
+	PreparedStatement ps = null;
+	ResultSet rs = null;
+	PrintStream consola = new PrintStream(System.out);
+	
+	String consulta = "DELETE INTO empleado WHERE id = ?";
+	
+	try {
+		ps = DB.conn.prepareStatement(consulta);
+		ps.setInt(1, empleado.getId() );
+	return  ps.executeUpdate();
+	
+		
+	}catch (Exception e) {
+		consola.println(e);
+		return 0;
+	}finally {
+		try {
+			DB.close(rs,ps);
+		} catch (Exception e2) {
+			consola.println(e2);
+		}
+		
+	}
+		
+}
 	//actualizar
+public static int editEmpleado(empleadoDTO empleado) {
 	
+	ConnectionFactory DB = new ConnectionFactory();
+	PreparedStatement ps = null;
+	ResultSet rs = null;
+	PrintStream consola = new PrintStream(System.out);
+	
+	String consulta = "UPDATE empleado SET nombre= ? , apellido=? , rol=? WHERE id=?";
+	
+	try {
+		ps = DB.conn.prepareStatement(consulta);
+		ps.setString(1, empleado.getNombre());
+		ps.setString(2, empleado.getApellido());
+		ps.setString(3, empleado.getRol());
+		ps.setInt(4, empleado.getId());
+		
+	return  ps.executeUpdate();
+	
+		
+	}catch (Exception e) {
+		consola.println(e);
+		return 0;
+	}finally {
+		try {
+			DB.close(rs,ps);
+		} catch (Exception e2) {
+			consola.println(e2);
+		}
+		
+	}
+		
+}
 	
 }
