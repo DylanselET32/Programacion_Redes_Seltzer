@@ -1,6 +1,7 @@
 package dao;
 
 import java.io.PrintStream;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -15,7 +16,7 @@ import dto.generalDTO;
 public class EmpleadoDAO {
 	//Muy parecido a hacer CRUD pero para un solo DTO (osea tabla)
 	
-	 ConnectionFactory.getInstance()
+	 
 	
 	
 	//obtener
@@ -26,7 +27,7 @@ public class EmpleadoDAO {
 	
 	public static LinkedList<empleadoDTO> getAllEmpleados() {
 		
-		
+		Connection DB = ConnectionFactory.getInstance().getConn();	
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		PrintStream consola = new PrintStream(System.out);
@@ -34,7 +35,7 @@ public class EmpleadoDAO {
 		
 		String consulta = "SELECT * from empleado";
 		try {
-			ps = DB.conn.prepareStatement(consulta);
+			ps = DB.prepareStatement(consulta);
 			
 			rs =  ps.executeQuery();
 			while(rs.next()) {
@@ -59,7 +60,7 @@ public class EmpleadoDAO {
 			return null;
 		}finally {
 			try {
-				DB.close(rs,ps);
+				ConnectionFactory.getInstance().close(rs,ps);
 			} catch (Exception e2) {
 				consola.println(e2);
 			}
@@ -72,7 +73,7 @@ public class EmpleadoDAO {
 	//agregar 
 public static int addEmpleado(empleadoDTO empleado) {
 		
-		ConnectionFactory DB = new ConnectionFactory();
+		Connection DB = ConnectionFactory.getInstance().getConn();	
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		PrintStream consola = new PrintStream(System.out);
@@ -80,7 +81,7 @@ public static int addEmpleado(empleadoDTO empleado) {
 		String consulta = "INSERT INTO `empleado`(`nombre`, `apellido`, `rol`) VALUES (?,?,?)";
 		
 		try {
-			ps = DB.conn.prepareStatement(consulta);
+			ps = DB.prepareStatement(consulta);
 			ps.setString(1, empleado.getNombre());
 			ps.setString(2, empleado.getApellido());
 			ps.setString(3, empleado.getRol());
@@ -93,7 +94,7 @@ public static int addEmpleado(empleadoDTO empleado) {
 			return 0;
 		}finally {
 			try {
-				DB.close(rs,ps);
+				ConnectionFactory.getInstance().close(rs,ps);
 			} catch (Exception e2) {
 				consola.println(e2);
 			}
@@ -106,7 +107,7 @@ public static int addEmpleado(empleadoDTO empleado) {
 	//borrar 
 public static int deleteEmpleado(empleadoDTO empleado) {
 	
-	ConnectionFactory DB = new ConnectionFactory();
+	Connection DB = ConnectionFactory.getInstance().getConn();		
 	PreparedStatement ps = null;
 	ResultSet rs = null;
 	PrintStream consola = new PrintStream(System.out);
@@ -114,7 +115,7 @@ public static int deleteEmpleado(empleadoDTO empleado) {
 	String consulta = "DELETE INTO empleado WHERE id = ?";
 	
 	try {
-		ps = DB.conn.prepareStatement(consulta);
+		ps = DB.prepareStatement(consulta);
 		ps.setInt(1, empleado.getId() );
 	return  ps.executeUpdate();
 	
@@ -124,7 +125,7 @@ public static int deleteEmpleado(empleadoDTO empleado) {
 		return 0;
 	}finally {
 		try {
-			DB.close(rs,ps);
+			ConnectionFactory.getInstance().close(rs,ps);
 		} catch (Exception e2) {
 			consola.println(e2);
 		}
@@ -135,7 +136,7 @@ public static int deleteEmpleado(empleadoDTO empleado) {
 	//actualizar
 public static int editEmpleado(empleadoDTO empleado) {
 	
-	ConnectionFactory DB = new ConnectionFactory();
+	Connection DB = ConnectionFactory.getInstance().getConn();
 	PreparedStatement ps = null;
 	ResultSet rs = null;
 	PrintStream consola = new PrintStream(System.out);
@@ -143,7 +144,7 @@ public static int editEmpleado(empleadoDTO empleado) {
 	String consulta = "UPDATE empleado SET nombre= ? , apellido=? , rol=? WHERE id=?";
 	
 	try {
-		ps = DB.conn.prepareStatement(consulta);
+		ps = DB.prepareStatement(consulta);
 		ps.setString(1, empleado.getNombre());
 		ps.setString(2, empleado.getApellido());
 		ps.setString(3, empleado.getRol());
@@ -157,7 +158,7 @@ public static int editEmpleado(empleadoDTO empleado) {
 		return 0;
 	}finally {
 		try {
-			DB.close(rs,ps);
+			ConnectionFactory.getInstance().close(rs,ps);
 		} catch (Exception e2) {
 			consola.println(e2);
 		}
