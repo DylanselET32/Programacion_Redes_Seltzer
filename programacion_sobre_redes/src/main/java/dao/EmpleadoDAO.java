@@ -7,13 +7,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.LinkedList;
-
-import Principal.ConnectionFactory;
+import Principal.connectionFactory;
 import dto.DTOfactory;
 import dto.empleadoDTO;
 import dto.generalDTO;
 
-public class EmpleadoDAO {
+public class EmpleadoDAO implements GeneralDAO<empleadoDTO>{
 	//Muy parecido a hacer CRUD pero para un solo DTO (osea tabla)
 	
 	 
@@ -25,9 +24,9 @@ public class EmpleadoDAO {
 		return null;
 	}
 	
-	public static LinkedList<empleadoDTO> getAllEmpleados() {
+	public  LinkedList<empleadoDTO> getAll() {
 		
-		Connection DB = ConnectionFactory.getInstance().getConn();	
+		Connection DB = connectionFactory.getInstance().getConection("MySQL");
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		PrintStream consola = new PrintStream(System.out);
@@ -60,7 +59,9 @@ public class EmpleadoDAO {
 			return null;
 		}finally {
 			try {
-				ConnectionFactory.getInstance().close(rs,ps);
+				rs.close();
+				ps.close();
+				DB.close();
 			} catch (Exception e2) {
 				consola.println(e2);
 			}
@@ -71,11 +72,10 @@ public class EmpleadoDAO {
 
 	
 	//agregar 
-public static int addEmpleado(empleadoDTO empleado) {
+public int add(empleadoDTO empleado) {
 		
-		Connection DB = ConnectionFactory.getInstance().getConn();	
+	Connection DB = connectionFactory.getInstance().getConection("MySQL");
 		PreparedStatement ps = null;
-		ResultSet rs = null;
 		PrintStream consola = new PrintStream(System.out);
 		
 		String consulta = "INSERT INTO `empleado`(`nombre`, `apellido`, `rol`) VALUES (?,?,?)";
@@ -86,6 +86,7 @@ public static int addEmpleado(empleadoDTO empleado) {
 			ps.setString(2, empleado.getApellido());
 			ps.setString(3, empleado.getRol());
 			
+			
 		return  ps.executeUpdate();
 		
 			
@@ -94,7 +95,8 @@ public static int addEmpleado(empleadoDTO empleado) {
 			return 0;
 		}finally {
 			try {
-				ConnectionFactory.getInstance().close(rs,ps);
+				ps.close();
+				DB.close();
 			} catch (Exception e2) {
 				consola.println(e2);
 			}
@@ -105,11 +107,10 @@ public static int addEmpleado(empleadoDTO empleado) {
 
 
 	//borrar 
-public static int deleteEmpleado(empleadoDTO empleado) {
+public int delete(empleadoDTO empleado) {
 	
-	Connection DB = ConnectionFactory.getInstance().getConn();		
+	Connection DB = connectionFactory.getInstance().getConection("MySQL");
 	PreparedStatement ps = null;
-	ResultSet rs = null;
 	PrintStream consola = new PrintStream(System.out);
 	
 	String consulta = "DELETE INTO empleado WHERE id = ?";
@@ -125,7 +126,8 @@ public static int deleteEmpleado(empleadoDTO empleado) {
 		return 0;
 	}finally {
 		try {
-			ConnectionFactory.getInstance().close(rs,ps);
+			ps.close();
+			DB.close();
 		} catch (Exception e2) {
 			consola.println(e2);
 		}
@@ -134,11 +136,10 @@ public static int deleteEmpleado(empleadoDTO empleado) {
 		
 }
 	//actualizar
-public static int editEmpleado(empleadoDTO empleado) {
+public int edit(empleadoDTO empleado) {
 	
-	Connection DB = ConnectionFactory.getInstance().getConn();
+	Connection DB = connectionFactory.getInstance().getConection("MySQL");
 	PreparedStatement ps = null;
-	ResultSet rs = null;
 	PrintStream consola = new PrintStream(System.out);
 	
 	String consulta = "UPDATE empleado SET nombre= ? , apellido=? , rol=? WHERE id=?";
@@ -158,13 +159,26 @@ public static int editEmpleado(empleadoDTO empleado) {
 		return 0;
 	}finally {
 		try {
-			ConnectionFactory.getInstance().close(rs,ps);
+			ps.close();
+			DB.close();
 		} catch (Exception e2) {
 			consola.println(e2);
 		}
 		
 	}
 		
+}
+
+@Override
+public int delete(LinkedList<empleadoDTO> aBorrar) {
+	// TODO Auto-generated method stub
+	return 0;
+}
+
+@Override
+public empleadoDTO getEmpleado(int id) {
+	// TODO Auto-generated method stub
+	return null;
 }
 	
 }
