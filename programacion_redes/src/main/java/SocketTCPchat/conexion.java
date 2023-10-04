@@ -1,4 +1,4 @@
-package SocketTCP;
+package SocketTCPchat;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -10,7 +10,7 @@ import java.net.UnknownHostException;
 
 public class conexion {
 
-	private final String direccion = "130.10.1.254"; // 127.0.0.1
+	private final String direccion = "localhost"; // 127.0.0.1
 	private final int port = 5050;
 
 	private InetAddress IP;

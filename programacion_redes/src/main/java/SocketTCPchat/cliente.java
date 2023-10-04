@@ -1,4 +1,4 @@
-package SocketTCP;
+package SocketTCPchat;
 
 import java.io.BufferedReader;
 import java.io.DataInputStream;
@@ -10,6 +10,8 @@ public class cliente extends conexion {
 
 	InputStreamReader isrCli = null;
 	DataInputStream disCli = null;
+	InputStreamReader isr = new InputStreamReader(System.in);
+	BufferedReader br = new BufferedReader(isr);
 
 	public cliente() {
 		super("cliente");
@@ -27,24 +29,43 @@ public class cliente extends conexion {
 
 			dosCli = new DataOutputStream(sock.getOutputStream());
 			disCli = new DataInputStream(sock.getInputStream());
-		
-			ps.println("enviando mensaje");
-			dosCli.writeUTF("Hola Todo Bien?");
-			dosCli.writeUTF("Buen dia");
-			dosCli.flush();
-
-			while (true) {
-				msg = disCli.readUTF();
-				ps.println("--"+msg);
+			
+			
+			boolean bucle = true;
+			while (bucle) {
+				ps.println("Escriba un mensaje a enviar: ");
+				while((msg = br.readLine()) != null && msg != "") {
+					if(msg == "/exit") {
+						bucle = false;
+					}
+					dosCli.writeUTF(msg);
+					dosCli.flush();
+				}
+				msg = null;
+				if(bucle) {
+					while ((msg = disCli.readUTF()) != null) {
+					ps.println("--"+msg);
+					}
+				}
+				
+				
+				
 			}
+			
+			Thread.sleep(200);
+			
+			
 
 		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (InterruptedException e) {
 			e.printStackTrace();
 		} finally {
 			try {
 				sock.close();
 
-
+				br.close();
+				isr.close();
 				if (isrCli != null)
 					isrCli.close();
 				

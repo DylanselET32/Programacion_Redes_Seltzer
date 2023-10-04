@@ -1,4 +1,4 @@
-package SocketTCP;
+package SocketTCPchat;
 
 import java.io.BufferedReader;
 import java.io.DataInputStream;
@@ -6,10 +6,13 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+
 public class servidor extends conexion {
 
 	DataInputStream disSer = null;
-
+	InputStreamReader isr = new InputStreamReader(System.in);
+	BufferedReader br = new BufferedReader(isr);
+	
 	public servidor() {
 		super("servidor");
 	}
@@ -32,11 +35,37 @@ public class servidor extends conexion {
 
 			ps.println("Esperando mensaje del cliente ...");
 
-			while (true) {
-				ps.println("--" + disSer.readUTF());
-				dosSer.writeUTF("Ya me llego tu mensaje, graciass!"); //envia el mensaje
-				dosSer.flush(); //limpia el canal
+			//while (true) {
+			//	ps.println("--" + disSer.readUTF());
+			//	dosSer.writeUTF("Ya me llego tu mensaje, graciass!"); //envia el mensaje
+			//	dosSer.flush(); //limpia el canal
+			//}
+			
+			msg = disSer.readUTF();
+			ps.println("--"+msg);
+			msg = null;
+			
+			
+			boolean bucle = true;
+			while (bucle) {
+				ps.println("Escriba un mensaje a enviar: ");
+				while((msg = br.readLine()) != null && msg != "") {
+					if(msg == "/exit") {
+						bucle = false;
+					}
+					dosCli.writeUTF(msg);
+					dosCli.flush();
+				}
+				msg = null;
+				if(bucle) {
+					while ((msg = disSer.readUTF()) != null) {
+					ps.println("--"+msg);
+					}
+				}
+				
 			}
+			
+			
 			/*
 			 * while( (msg = read.readLine()) != null ) { //aca recibi un mensaje seguro
 			 * ps.println( "mensaje recibido: " + msg );
