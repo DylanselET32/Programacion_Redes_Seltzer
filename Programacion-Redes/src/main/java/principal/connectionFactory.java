@@ -1,4 +1,4 @@
-package Principal;
+package principal;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -51,15 +51,15 @@ public class connectionFactory {
 	 * @return
 	 */
 	// public synchronized static ConnectionFactory getInstance() {
-	public Connection getConection(MotorDB db) {
+	public Connection getConection(String db) {
 
 		switch (db) {
-		case MySQL:
+		case "MySQL":
 				MySQL sql = new MySQL();
 				conn = sql.getConnection();
 			break;
 
-		case Mongo:
+		case "Mongo":
 				Mongo mong = new Mongo();
 				conn = mong.getConnection();
 			break;
@@ -97,15 +97,15 @@ class Mongo {
 class MySQL {
 	private String driver = "com.mysql.cj.jdbc.Driver";
 
-	private String db = "/usuarios";
-	private String port = "3306";
+	private String db = "/sistematienda";
+	private String port = ":3306";
 	private String EngineDB = "mysql";
 	private String ip = "://localhost";
 
 	private String url = "jdbc:".concat(EngineDB).concat(ip).concat(port).concat(db);
 	private String user = "root";
 	private String pass = "";
-
+	
 	Connection conn = null;
 
 	public MySQL() {
