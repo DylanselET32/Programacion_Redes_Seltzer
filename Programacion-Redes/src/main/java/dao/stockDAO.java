@@ -201,7 +201,149 @@ public class stockDAO implements GeneralDAO<stockDTO>{
 
 		return aux;
 	}
+	/*-----------------------------------------------------------------------------------
+	 * 								METODO PARA OBTENER TODOS LOS PRODUCTOS del H2 (base global)
+	 * ----------------------------------------------------------------------------------
+	*/
 	
+	@Override
+	public LinkedList<stockDTO> getAllH2() {
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		LinkedList<stockDTO> aux = new LinkedList<stockDTO>();
+
+		String sql = "SELECT * FROM stock";
+
+		try {
+			conn = connectionFactory.getInstance().getConection("H2");
+			ps = conn.prepareStatement(sql);
+
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				aux.add( (stockDTO)DTOfactory.getInstance().getDTO("stock", rs));
+			}
+		} catch (SQLException e) {
+			LOG.log(Level.SEVERE, null, e);
+		} finally {
+			cerrarConexiones(rs, ps, conn);
+		}
+
+		return aux;
+	}
+	/*-----------------------------------------------------------------------------------
+	 * 								METODO PARA SETEAR TODOS LOS PRODUCTOS 
+	 * ----------------------------------------------------------------------------------
+	*/
+	
+	@Override
+	public int setAll(LinkedList<stockDTO> lista) {
+	    Connection conn = null;
+	    PreparedStatement ps = null;
+	    ResultSet rs = null;
+
+	    String sql = "UPDATE stock SET nombre = ?, descripcion = ?, precio_compra = ?, precio_venta = ?, cantidad = ?, discontinuo = ? WHERE id = ?";
+
+	    try {
+	        conn = connectionFactory.getInstance().getConection("MySQL");
+	        conn.setAutoCommit(false);
+
+	        ps = conn.prepareStatement(sql);
+
+	        for (stockDTO stock : lista) {
+	            ps.setString(1, stock.getNombre());
+	            ps.setString(2, stock.getDescripcion());
+	            ps.setDouble(3, stock.getPrecio_compra());
+	            ps.setDouble(4, stock.getPrecio_venta());
+	            ps.setInt(5, stock.getCantidad());
+	            ps.setBoolean(6, stock.isDiscontinuo());
+	            ps.setInt(7, stock.getId());
+
+	            ps.addBatch();
+	        }
+
+	        int[] resultados = ps.executeBatch();
+
+	        conn.commit();
+
+	        return resultados.length;
+	    } catch (SQLException e) {
+	        try {
+	            if (conn != null) {
+	                conn.rollback();
+	            }
+	        } catch (SQLException e2) {
+	            LOG.log(Level.SEVERE, "Error al hacer rollback", e2);
+	        }
+	        LOG.log(Level.SEVERE, null, e);
+	        return 0;
+	    } finally {
+	        try {
+	            conn.setAutoCommit(true);
+	        } catch (SQLException e) {
+	            LOG.log(Level.SEVERE, "Error al restaurar autocommit", e);
+	        }
+	        cerrarConexiones(rs, ps, conn);
+	    }
+	}
+	/*-----------------------------------------------------------------------------------
+	 * 								METODO SETEAR OBTENER TODOS LOS PRODUCTOS del H2 (base global)
+	 * ----------------------------------------------------------------------------------
+	*/
+	
+	@Override
+	public int setAllH2(LinkedList<stockDTO> lista) {
+	    Connection conn = null;
+	    PreparedStatement ps = null;
+	    ResultSet rs = null;
+
+	    String sql = "UPDATE stock SET nombre = ?, descripcion = ?, precio_compra = ?, precio_venta = ?, cantidad = ?, discontinuo = ? WHERE id = ?";
+
+	    try {
+	        conn = connectionFactory.getInstance().getConection("H2");
+	        conn.setAutoCommit(false);
+
+	        ps = conn.prepareStatement(sql);
+
+	        for (stockDTO stock : lista) {
+	            ps.setString(1, stock.getNombre());
+	            ps.setString(2, stock.getDescripcion());
+	            ps.setDouble(3, stock.getPrecio_compra());
+	            ps.setDouble(4, stock.getPrecio_venta());
+	            ps.setInt(5, stock.getCantidad());
+	            ps.setBoolean(6, stock.isDiscontinuo());
+	            ps.setInt(7, stock.getId());
+
+	            ps.addBatch();
+	        }
+
+	        int[] resultados = ps.executeBatch();
+
+	        conn.commit();
+
+	        return resultados.length;
+	    } catch (SQLException e) {
+	        try {
+	            if (conn != null) {
+	                conn.rollback();
+	            }
+	        } catch (SQLException e2) {
+	            LOG.log(Level.SEVERE, "Error al hacer rollback", e2);
+	        }
+	        LOG.log(Level.SEVERE, null, e);
+	        return 0;
+	    } finally {
+	        try {
+	            conn.setAutoCommit(true);
+	        } catch (SQLException e) {
+	            LOG.log(Level.SEVERE, "Error al restaurar autocommit", e);
+	        }
+	        cerrarConexiones(rs, ps, conn);
+	    }
+	}
+
 	/*-----------------------------------------------------------------------------------
 	 * 								METODO PARA obtener PRODUCTO por id
 	 * ----------------------------------------------------------------------------------

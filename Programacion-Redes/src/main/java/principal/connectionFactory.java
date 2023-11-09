@@ -59,9 +59,9 @@ public class connectionFactory {
 				conn = sql.getConnection();
 			break;
 
-		case "Mongo":
-				Mongo mong = new Mongo();
-				conn = mong.getConnection();
+		case "H2":
+				H2 h2 = new H2();
+				conn = h2.getConnection();
 			break;
 		}
 
@@ -82,14 +82,41 @@ public class connectionFactory {
 	 */
 }
 
-class Mongo {
+class H2 {
 	
-	public Mongo() {
-		
-	}
+	//private String driver = "jdbc:h2:tcp://localhost/~/tmp/h2db/ProgramacionSobreRedes";
+
+	//private String db = "/test";
+	//private String port = ":3306";
+	//private String EngineDB = "mysql";
+	//private String ip = "://localhost";
+
+	private String url = "jdbc:h2:~/test";
+	private String user = "sa";
+	private String pass = "sa";
 	
+	Connection conn = null;
+
+
 	public Connection getConnection() {
-		return null;
+
+		try {
+			conn = DriverManager.getConnection(url, user, pass);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return conn;
+	}
+
+	public void close() {
+		try {
+			conn.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }
 

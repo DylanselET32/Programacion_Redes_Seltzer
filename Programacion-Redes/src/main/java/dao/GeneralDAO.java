@@ -18,6 +18,9 @@ public interface GeneralDAO<T> {
 	//public int update(LinkedList<T> registro) ;
 
 	public LinkedList<T> getAll();
+	public LinkedList<T> getAllH2();
+	public int setAll(LinkedList<T> lista);
+	public int setAllH2(LinkedList<T> lista);
 
 	public T getById(int id);
 	

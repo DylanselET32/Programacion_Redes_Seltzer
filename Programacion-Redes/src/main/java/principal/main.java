@@ -1,6 +1,7 @@
 package principal;
 
 import java.io.PrintStream;
+import java.sql.Connection;
 import java.util.LinkedList;
 
 import dao.daoFactory;
@@ -13,22 +14,13 @@ public class main {
 	public static PrintStream ps = new PrintStream(System.out);
 	
 		public static void main(String[] args) {
-			/*stockDTO item = (stockDTO)DTOfactory.getInstance().getDTO("stock");
-			item.setNombre("Dylan");
-			item.setDescripcion("Esta es la descripcion");
-			item.setPrecio_compra(500);
-			item.setPrecio_venta(1500);
-			item.setCantidad(15);
-			item.setDiscontinuo(false);
 			
 			
-			stockDAO datos = new stockDAO();
-			
-			datos.add(item);
-		
-			ps.println("SE AGREGO CORRECTAMETNE");
-			*/
-			menu();
+			//actualizo la base de datos local
+			LinkedList<stockDTO> productosH2 = daoFactory.getInstance().getDAO("stock").getAllH2();
+		    daoFactory.getInstance().getDAO("stock").setAll(productosH2);
+		    menu();
+		    
 	}
 		
 		
@@ -62,6 +54,11 @@ public class main {
 		        	eliminarProducto();
 		        	break;
 		        case 0:
+		        	
+		        	//actualizo la base de datos global
+					LinkedList<stockDTO> productosLocales = daoFactory.getInstance().getDAO("stock").getAll();
+				    daoFactory.getInstance().getDAO("stock").setAllH2(productosLocales);
+				    
 		            ps.println("¡Hasta luego!");
 		            break;
 		        default:
