@@ -30,26 +30,25 @@ public class servidor extends conexion {
 
 			ps.println("Cliente conectado con exito Ya podes hablar!!");
 			
-			ps.println("Esperando mensaje del cliente ..." );
-
+			
 			// thread que escucha todo el tiempo los mensajes que lleguen
 			Thread recibeSocket = new Thread(
 					new Runnable() {
 						public void run() {
 							try {
-									while (msg != "/exit") {
+									while (msgToSend != "/exit" || msg != "/exit") {
 										msg = disSer.readUTF();
 										if(msg.equals("/exit"))
 										{
 											ps.println(ANSI_RED + "-------- Cliente desconectado --------" + ANSI_RESET);
 											break;
 										}
-										ps.println(ANSI_BLUE + "--" + msg + ANSI_RESET);
-
-										ps.println("--" + msg);
+										ps.println(ANSI_PURPLE + ">" + msg + ANSI_RESET);
+						
 										
 									
 									}
+									
 							} catch (IOException e) {
 								// TODO Auto-generated catch block
 								e.printStackTrace();
@@ -79,11 +78,11 @@ public class servidor extends conexion {
 									public void run() {
 										try {
 											
-												while (msgToSend != "/exit" ) {
-													ps.println(ANSI_GREEN + "> " + ANSI_RESET);
+												while (msgToSend != "/exit" || msg != "/exit") {
+													ps.print(ANSI_GREEN + "> ");
 													msgToSend = br.readLine();
-													
-													if(msg.equals("/exit"))
+													ps.println(ANSI_RESET);
+													if(msgToSend.equals("/exit") || msg.equals("/exit"))
 													{
 														ps.println(ANSI_RED + "-------- Chat Cerrado --------" + ANSI_RESET);
 														break;
@@ -115,25 +114,13 @@ public class servidor extends conexion {
 								},"EnvioMsgSocket"
 						);
 						
-						recibeSocket.start();
+						envioMsgSocket.start();
 						
 			
 
 		} catch (IOException e) {
 			e.printStackTrace();
-		} finally {
-			try {
-				sock.close();
-				
-				if (disSer != null)
-					disSer.close();
-
-				dosSer.close();
-				servSock.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
+		} 
 
 	}
 

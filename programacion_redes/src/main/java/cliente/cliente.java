@@ -5,6 +5,8 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
+import utils.conexion;
+
 public class cliente extends conexion {
 
 	DataInputStream disCli = null;
@@ -29,6 +31,8 @@ public class cliente extends conexion {
 			ps.println("enviando mensaje");
 			dosCli.writeUTF("truco");
 			dosCli.flush();
+			
+			
 
 			while (true) {
 				msg = disCli.readUTF();
