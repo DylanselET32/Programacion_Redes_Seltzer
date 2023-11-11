@@ -42,6 +42,7 @@ public class cliente extends conexion {
 			}
 
 		} catch (IOException e) {
+			
 			e.printStackTrace();
 		} finally {
 			try {

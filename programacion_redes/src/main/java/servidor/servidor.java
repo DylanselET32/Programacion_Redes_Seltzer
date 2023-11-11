@@ -119,6 +119,7 @@ public class servidor extends conexion {
 			
 
 		} catch (IOException e) {
+			ps.println(ANSI_RESET);
 			e.printStackTrace();
 		} 
 
