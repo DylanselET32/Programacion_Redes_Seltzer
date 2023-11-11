@@ -1,0 +1,16 @@
+/.metadata/
+programacion_redes/target/classes/cliente/cliente.class
+programacion_redes/target/classes/cliente/mainClient.class
+programacion_redes/target/classes/META-INF/MANIFEST.MF
+programacion_redes/target/classes/META-INF/maven/ar.edu.et32/programacion_redes/pom.properties
+programacion_redes/target/classes/META-INF/maven/ar.edu.et32/programacion_redes/pom.xml
+programacion_redes/target/classes/servidor/mainServer.class
+programacion_redes/target/classes/servidor/servidor$1.class
+programacion_redes/target/classes/servidor/servidor$2.class
+programacion_redes/target/classes/servidor/servidor.class
+programacion_redes/target/classes/utils/conexion.class
+programacion_redes/.classpath
+programacion_redes/.settings/org.eclipse.jdt.apt.core.prefs
+programacion_redes/.settings/org.eclipse.jdt.core.prefs
+programacion_redes/.settings/org.eclipse.m2e.core.prefs
+programacion_redes/.project
