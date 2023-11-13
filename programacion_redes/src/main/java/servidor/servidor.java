@@ -43,24 +43,30 @@ public class servidor extends conexion {
 											ps.println(ANSI_RED + "-------- Cliente desconectado --------" + ANSI_RESET);
 											break;
 										}
-										ps.println(ANSI_PURPLE + ">" + msg + ANSI_RESET);
-						
+										ps.println(ANSI_PURPLE + "\n>" + msg + ANSI_GREEN);						
 										
 									
 									}
 									
 							} catch (IOException e) {
 								// TODO Auto-generated catch block
-								e.printStackTrace();
+								if(e.getMessage().equals("Socket closed")) {
+									ps.println(ANSI_RED + "-------- Chat Cerrado --------" + ANSI_RESET);
+								}else if(e.getMessage().equals("Connection reset")){
+									ps.println(ANSI_RED + "-------- Cliente Desconectado --------" + ANSI_RESET);
+								}else {
+									e.printStackTrace();
+								}
+	
+								
 							}finally {
 									try {
-										sock.close();
+										if (sock != null) sock.close();
+										if (disSer != null)disSer.close();
+										if (dosSer != null)dosSer.close();
+										if (servSock != null)servSock.close();
 										
-										if (disSer != null)
-											disSer.close();
-	
-										dosSer.close();
-										servSock.close();
+										
 									} catch (IOException e) {
 										e.printStackTrace();
 									}
@@ -79,12 +85,13 @@ public class servidor extends conexion {
 										try {
 											
 												while (msgToSend != "/exit" || msg != "/exit") {
-													ps.print(ANSI_GREEN + "> ");
+													ps.print(ANSI_GREEN);
 													msgToSend = br.readLine();
 													ps.println(ANSI_RESET);
 													if(msgToSend.equals("/exit") || msg.equals("/exit"))
 													{
-														ps.println(ANSI_RED + "-------- Chat Cerrado --------" + ANSI_RESET);
+														dosSer.writeUTF(msgToSend);
+														dosSer.flush();
 														break;
 													}
 													if(msgToSend != null  && msgToSend != "") {
@@ -96,16 +103,19 @@ public class servidor extends conexion {
 												
 										} catch (IOException e) {
 											// TODO Auto-generated catch block
-											e.printStackTrace();
+											if(e.getMessage().equals("Socket closed")) {
+												ps.println(ANSI_RED + "-------- Chat Cerrado --------" + ANSI_RESET);
+											}else if(e.getMessage().equals("Connection reset")){
+												ps.println(ANSI_RED + "-------- Cliente Desconectado --------" + ANSI_RESET);
+											}else {
+												e.printStackTrace();
+											}
 										}finally {
 												try {
-													sock.close();
-													
-													if (disSer != null)
-														disSer.close();
-				
-													dosSer.close();
-													servSock.close();
+													if (sock != null) sock.close();
+													if (disSer != null)disSer.close();
+													if (dosSer != null)dosSer.close();
+													if (servSock != null)servSock.close();
 												} catch (IOException e) {
 													e.printStackTrace();
 												}
