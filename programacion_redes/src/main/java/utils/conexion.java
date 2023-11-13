@@ -22,8 +22,8 @@ public class conexion {
     public static final String ANSI_CYAN = "\u001B[36m";
     public static final String ANSI_RESET = "\u001B[0m";	
 	
-	private final String direccion = "localhost"; // 127.0.0.1
-	private final int port = 5050;
+	private  String direccion = "localhost"; // 127.0.0.1
+	private  int port = 5050;
 
 	private InetAddress IP;
 
@@ -38,18 +38,19 @@ public class conexion {
 	
 	protected InputStreamReader isr;
 	protected BufferedReader br;
-	public conexion(String tipo) {
+	
+	public conexion() {
 		ps = new PrintStream(System.out);
 		isr = new InputStreamReader(System.in);
 		br = new BufferedReader(isr);
 		
+	}
+	public void setConexion(String tipo,String direccionIP,int puerto) {
+		
 		try {
-			IP = InetAddress.getByName(direccion);
-		} catch (UnknownHostException e) {
-			e.printStackTrace();
-		}
-
-		try {
+			IP = InetAddress.getByName(direccionIP);
+			port = puerto;
+			
 			if (tipo.equals("cliente")) {
 				sock = new Socket(IP, port);
 			} else if (tipo.equals("servidor")) {
@@ -60,7 +61,7 @@ public class conexion {
 			e.printStackTrace();
 		}
 	}
-
+	
 	public InetAddress getIP() {
 		return IP;
 	}

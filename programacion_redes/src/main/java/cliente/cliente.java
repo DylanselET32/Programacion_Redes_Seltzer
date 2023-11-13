@@ -11,12 +11,17 @@ public class cliente extends conexion {
     DataInputStream disCli = null;
 
     public cliente() {
-        super("cliente");
+    	 
     }
 
     public void clienteOn() {
         try {
-
+        	ps.println("Ingrese la ip del servidor(ej: 127.0.0.1): ");
+        	String address = br.readLine();
+        	ps.println("Ingrese el puerto(ej:5050): ");
+        	int puerto = Integer. parseInt(br.readLine());
+        	setConexion("cliente",address,puerto);
+        	
             ps.println("IP: " + sock.getInetAddress().getHostAddress() + "\nNombre: "
                     + sock.getInetAddress().getHostName() + "\nPort: " + sock.getPort() + "\nPort Local: "
                     + sock.getLocalPort() + "\n");
@@ -25,7 +30,8 @@ public class cliente extends conexion {
             disCli = new DataInputStream(sock.getInputStream());
 
             ps.println("Ya podes mandar mensajes!");
-            
+			ps.println("Podes escribir" +ANSI_RED+" /exit "+ ANSI_RESET+"para finalizar la conversacion");
+
 
             // Hilo para recibir mensajes del servidor
             Thread recibeSocket = new Thread(new Runnable() {

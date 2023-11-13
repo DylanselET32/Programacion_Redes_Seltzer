@@ -11,14 +11,19 @@ public class servidor extends conexion {
 	DataInputStream disSer = null;
 
 	public servidor() {
-		super("servidor");
+		
 	}
 
 	@SuppressWarnings("deprecation")
 	public void serverOn() {
 		try {
-			ps.println("Esperando a un cliente ...");
-
+			
+        	ps.println("Ingrese el puerto para escuchar(ej:5050): ");
+        	int puerto = Integer. parseInt(br.readLine());
+        	setConexion("servidor","localhost",puerto);
+        
+			ps.println("Esperando a un cliente en el puerto "+puerto+"...");
+			
 			// congela programa (thread)
 			sock = servSock.accept();
 			ps.println(
@@ -29,6 +34,7 @@ public class servidor extends conexion {
 			disSer = new DataInputStream( sock.getInputStream());
 
 			ps.println("Cliente conectado con exito Ya podes hablar!!");
+			ps.println("Podes escribir" +ANSI_RED+" /exit "+ ANSI_RESET+"para finalizar la conversacion");
 			
 			
 			// thread que escucha todo el tiempo los mensajes que lleguen
@@ -61,6 +67,7 @@ public class servidor extends conexion {
 								
 							}finally {
 									try {
+										
 										if (sock != null) sock.close();
 										if (disSer != null)disSer.close();
 										if (dosSer != null)dosSer.close();
